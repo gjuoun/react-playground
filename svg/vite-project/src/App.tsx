@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
-import {ReactComponent as Icon} from './icon.svg'
+import { ReactComponent as Icon } from './icon.svg'
 import styled from "@emotion/styled"
-import {css} from '@emotion/react'
+import { css } from '@emotion/react'
+import FancyButtonLog from './logProps'
 
 function App() {
   const [count, setCount] = useState(0)
+  // You can now get a ref directly to the DOM button:
+  const ref = React.createRef<HTMLButtonElement>();
+
 
   return (
     <div className="App">
-      <p>hey</p>
-      <Icon width="10em" height="10em" css={css`
-        *{
-          fill: yellow
-        }
-      `}/>
-      <StyledIcon/>
+      <button
+        onClick={() => {
+          const attr = ref.current?.attributes
+          console.log(attr);
+
+        }}
+      >Hey</button>
+      <FancyButton ref={ref}>
+        Click me!
+      </FancyButton>
+      <FancyButtonLog />
     </div>
   )
 }
@@ -23,9 +31,11 @@ function App() {
 export default App
 
 
+const FancyButton = React.forwardRef<HTMLButtonElement,
+  { children: React.ReactNode, onClick?: React.MouseEventHandler<HTMLButtonElement> }>
+  ((props, ref) => (
+    <button ref={ref} className="FancyButton" onClick={props.onClick}>
+      {props.children}
+    </button>
+  ));
 
-const StyledIcon = styled(Icon)`
-  *{
-    fill: red
-  }
-`

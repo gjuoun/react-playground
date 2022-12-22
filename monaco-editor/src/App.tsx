@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import * as monaco from "monaco-editor";
 
 export const App = () => {
-  const [text, setText] = React.useState("");
+  const [text, setText] = React.useState(`const h = {
+    a: "b"
+}`);
   const editorRef = React.useRef<monaco.editor.IStandaloneCodeEditor>();
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export const App = () => {
 
   return (
     <div>
-      hello
+      <div className="text-blue-500 h-[300px]">thsi is good</div>
       <div
         id="monaco"
         style={{ height: 300, border: "1px solid gray" }}

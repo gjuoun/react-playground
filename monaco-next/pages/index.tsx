@@ -3,30 +3,37 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 
-const MonacoEditor = dynamic(import("react-monaco-editor"), { ssr: false });
+const Editor = dynamic(
+  () =>
+    import("monaco-editor").then((mod) => {
+      const editor = mod.default.editor.create(
+        document.querySelector(".container")!,
+        {
+          value: ``,
+          language: "json",
+        }
+      );
+
+      return <div>hey</div>;
+    }),
+  {
+    ssr: false,
+  }
+);
 
 export default function Home() {
-  const [postBody, setPostBody] = useState("");
-  // etc
-  return (
-    <div>
-      {/* etc */}
-      <MonacoEditor
-        editorDidMount={() => {}}
-        width="800"
-        height="600"
-        language="markdown"
-        theme="vs"
-        value={postBody}
-        options={{
-          minimap: {
-            enabled: true,
-          },
-        }}
-        onChange={setPostBody}
-      />
-    </div>
-  );
+  const [postBody, setPostBody] = useState(`{
+    "userId": 1,
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+  }`);
+
+  useEffect(() => {
+    // console.log(window.MonacoEnvironment);
+    if (typeof navigator !== "undefined") {
+    }
+  }, []);
 
   return (
     <>
@@ -36,8 +43,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="text-blue-400"></div>
-      <MonacoEditor />
+      <div className="text-blue-400">textsdf safd s fda</div>
+      <div className="container"></div>
     </>
   );
 }

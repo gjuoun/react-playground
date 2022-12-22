@@ -19,7 +19,7 @@ module.exports = (phase, { defaultConfig }) => {
             "scss",
             "yaml",
           ],
-          // filename: "static/[name].worker.js",
+          filename: "static/[name].worker.js",
         })
       ];
       return config;

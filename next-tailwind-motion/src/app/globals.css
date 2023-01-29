@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .gradient-button {
+    position: relative;
+    font-weight: bold;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    border-radius: 10px;
+    z-index: -2;
+  }
+
+  .gradient-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 8.5px;
+    top: 0.125rem;
+    left: 0.125rem;
+    right: 0.125rem;
+    bottom: 0.125rem;
+    background: theme(colors.black);
+    z-index: -1;
+  }
+
+  .conic-red {
+    background-image: conic-gradient(
+      from var(--angle),
+      theme(colors.conic-red.stop1),
+      theme(colors.conic-red.stop2),
+      theme(colors.conic-red.stop3),
+      theme(colors.conic-red.stop1)
+    );
+  }
+
+  .conic-blue {
+    background-image: conic-gradient(
+      from var(--angle),
+      theme(colors.conic-blue.stop1),
+      theme(colors.conic-blue.stop2),
+      theme(colors.conic-blue.stop3),
+      theme(colors.conic-blue.stop1)
+    );
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes increase-angle {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  .animate-increase-angle {
+    animation: increase-angle;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 10s;
+  }
+}

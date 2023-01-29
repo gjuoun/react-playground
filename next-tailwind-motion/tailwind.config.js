@@ -13,10 +13,9 @@ module.exports = {
           stop1: "#2192FF",
           stop2: "#38E54D",
           stop3: "#FDFF00",
-        }
+        },
       },
-      animation: {
-      },
+      animation: {},
     },
   },
   plugins: [],

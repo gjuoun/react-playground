@@ -13,7 +13,7 @@ const blurSizeMap = {
   large: "[filter:blur(20px)]",
 };
 
-export const GradientButton = ({
+export const GradientText = ({
   className,
   color = "red",
   loading = false,
@@ -27,32 +27,11 @@ export const GradientButton = ({
 }>) => {
   const buttonClasses = clsx([
     colors[color],
-    "gradient-button py-2 px-4",
+    "relative font-bold bg-clip-text text-transparent",
     "animate-increase-angle ",
     Boolean(loading) && "[animation-duration:.5s]",
     className,
   ]);
 
-  const blurClasses = clsx([
-    "absolute top-[calc(100%/10)] left-0 right-0 bottom-0 z-[-3] ",
-    colors[color],
-    Boolean(loading) && "[animation-duration:.5s]",
-    blurSize && blurSizeMap[blurSize],
-    "animate-increase-angle ",
-  ]);
-
-  return (
-    <button className={buttonClasses}>
-      {children}
-
-      {blurSize && (
-        <span
-          style={{
-            transform: "scale(0.9)",
-          }}
-          className={blurClasses}
-        ></span>
-      )}
-    </button>
-  );
+  return <div className={buttonClasses}>{children}</div>;
 };

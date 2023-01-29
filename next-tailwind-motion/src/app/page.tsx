@@ -28,31 +28,33 @@ export default function Home() {
 
         <GradientText>This is my title</GradientText>
 
-        <GradientTextField
-          label={"Email"}
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-        />
+        <div className="flex flex-col gap-4">
+          <GradientTextField
+            label={"Email"}
+            value={value}
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
+          />
 
-        <GradientTextField
-          label={"Name"}
-          value={value2}
-          // error={true}
-          onChange={(e) => {
-            setValue2(e.target.value);
-          }}
-        />
+          <GradientTextField
+            label={"Name"}
+            value={value2}
+            // error={true}
+            onChange={(e) => {
+              setValue2(e.target.value);
+            }}
+          />
 
-        <GradientTextField
-          label={"Age"}
-          value={value3}
-          error={"Age is required"}
-          onChange={(e) => {
-            setValue3(e.target.value);
-          }}
-        />
+          <GradientTextField
+            label={"Age"}
+            value={value3}
+            error={"Age is required"}
+            onChange={(e) => {
+              setValue3(e.target.value);
+            }}
+          />
+        </div>
       </div>
     </div>
   );

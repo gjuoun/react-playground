@@ -28,16 +28,16 @@ export const GradientTextField = ({
   const labelClasses = useMemo(
     () =>
       clsx([
-        "absolute bottom-0 left-0 right-0 transition-all ",
+        "absolute left-0 bottom-0 transition-all ",
         "pointer-events-none bg-white",
         "font-bold bg-clip-text text-transparent animate-increase-angle",
         "origin-bottom-left",
         "bg-white bg-[length:200%]",
-        focus && "scale-75 translate-y-[18px]",
+        { "scale-75 translate-y-[18px]": Boolean(focus) || Boolean(value) },
         { "conic-red": Boolean(error) },
         { "conic-blue": Boolean(focus) && !Boolean(error) },
       ]),
-    [error, focus]
+    [error, focus, value]
   );
 
   const borderClasses = useMemo(
@@ -45,7 +45,7 @@ export const GradientTextField = ({
       clsx([
         "h-[1px] transition-all animate-increase-angle bg-white bg-[length:200%]",
         { "conic-red": Boolean(error) },
-        { "conic-blue": Boolean(focus || hover) && !Boolean(error) },
+        { "conic-blue": Boolean(hover || focus) && !Boolean(error) },
       ]),
     [error, focus, hover]
   );
@@ -59,7 +59,7 @@ export const GradientTextField = ({
   );
 
   return (
-    <div className="w-full relative">
+    <div className="w-full relative mb-4">
       <label className={labelClasses}>{label}</label>
       {typeof error === "string" && <div className={errorClasses}>{error}</div>}
       <input
@@ -70,9 +70,8 @@ export const GradientTextField = ({
           onFocus?.(e);
         }}
         onBlur={(e) => {
-          if (!value) {
-            setFocus(false);
-          }
+          setFocus(false);
+          setHover(false);
           onBlur?.(e);
         }}
         value={value}
